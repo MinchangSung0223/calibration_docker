@@ -36,7 +36,7 @@ RUN  add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(ls
 RUN apt-get update
 RUN apt-get install -y librealsense2-dkms librealsense2-utils librealsense2-dev librealsense2-dbg
 RUN /bin/bash -c " pip3 install pyrealsense2; pip3 install tqdm; pip3 install torch; pip3 install pycocotools;"
-RUN /bin/bash -c "cd /root/gqcnn_smc/gqcnn; bash scripts/downloads/download_example_data.sh; bash scripts/downloads/models/download_models.sh"
+RUN /bin/bash -c "git clone https://github.com/tjdalsckd/calibration_docker; cp calibration_docker/GQCNN-4.0-PJ.zip /root/gqcnn_smc/gqcnn/models"
 RUN apt-get install -y \
         build-essential \
         python3 \
