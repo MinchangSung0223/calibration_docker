@@ -36,7 +36,7 @@ RUN  add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(ls
 RUN apt-get update
 RUN apt-get install -y librealsense2-dkms librealsense2-utils librealsense2-dev librealsense2-dbg
 RUN /bin/bash -c " pip3 install pyrealsense2; pip3 install tqdm; pip3 install torch; pip3 install pycocotools;"
-RUN /bin/bash -c "git clone https://github.com/tjdalsckd/calibration_docker; cp calibration_docker/GQCNN-4.0-PJ.zip /root/gqcnn_smc/gqcnn/models"
+RUN /bin/bash -c "cd root;git clone https://github.com/tjdalsckd/calibration_docker;"
 RUN apt-get install -y \
         build-essential \
         python3 \
@@ -56,7 +56,7 @@ RUN apt-get install -y \
 RUN pip3 install -U setuptools
 RUN apt-get install -y gedit
 RUN pip3 install torch==1.4.0 torchvision==0.5.0 -f https://download.pytorch.org/whl/cu100/torch_stable.html
-RUN /bin/bash -c "cd /root/gqcnn_smc/gqcnn/models;unzip GQCNN-4.0-PJ.zip"
+RUN /bin/bash -c "mkdir -p /root/gqcnn_smc/gqcnn/models;cd /root/gqcnn_smc/gqcnn/models; cp /root/calibration_docker/GQCNN-4.0-PJ.zip .; unzip GQCNN-4.0-PJ.zip"
 RUN /bin/bash -c "cd /root/gqcnn_smc/gqcnn; pip3 install . ;pip3 install autolab-core==0.0.14 autolab-perception==0.0.8 visualization==0.1.1"
 RUN /bin/bash -c "cd /root; git clone https://github.com/tjdalsckd/gqcnnddddd gqcnn_smc2; cp gqcnn_smc2/gqcnn_pj_realsense.yaml gqcnn_smc; rm -r gqcnn_smc2"
 
